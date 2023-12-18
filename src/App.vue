@@ -19,11 +19,17 @@
           <li class="nav-item">
             <RouterLink :to="'/products'" class="nav-link" active-class="active-link">Все объявления</RouterLink>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="role === 1 || role === 3">
             <RouterLink :to="'/products/my'" class="nav-link" active-class="active-link">Мои объявление</RouterLink>
           </li>
-          <li class="nav-item">
-            <RouterLink :to="'/product/create'" class="nav-link" active-class="active-link">Создать объявление</RouterLink>
+          <li class="nav-item" v-if="role === 2 || role === 3">
+            <RouterLink :to="'/admin/users'" class="nav-link">Редактирование пользователей</RouterLink>
+          </li>
+          <li class="nav-item" v-if="role === 2 || role === 3">
+            <RouterLink :to="'/admin/categories'" class="nav-link">Редактирование категорий</RouterLink>
+          </li>
+          <li class="nav-item" v-if="role === 1 || role === 3">
+            <RouterLink :to="'/product/create'" class="nav-link" active-class="active-link">Создание объявление</RouterLink>
           </li>
           <li class="nav-item">
             <RouterLink :to="'/login'" class="nav-link">log out</RouterLink>
@@ -40,18 +46,46 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-// import PostsData from "@/views/PostsData.vue";
 
 export default {
   name: 'App',
   components: {
     // HelloWorld,
     // PostsData
+  },
+  computed: {
+    role() {
+      return this.getUserRoleId();
+    }
+  },
+  methods: {
+    parseJwt(token) {
+      try {
+        const base64Url = token.split('.')[1]; // Получаем Payload
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const payload = decodeURIComponent(atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(payload);
+      } catch (error) {
+        console.error('Error decoding token:', error);
+        return null;
+      }
+    },
+    getUserRoleId() {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decoded = this.parseJwt(token);
+        console.log(decoded.role_id);
+        return decoded.role_id; // Получаем role_id из токена
+      }
+      return null;
+    }
   }
 }
 </script>
-}
+
 <style>
 .header {
   display: flex !important;

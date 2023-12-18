@@ -10,7 +10,7 @@ const authService = {
             if (response && response.data) {
                 localStorage.setItem('authToken', response.data.access_token);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
-                localStorage.setItem('roles', response.data.user.roles[0]);
+                localStorage.setItem('role', response.data.user.role_id);
 
 
                 return { success: true, data: response.data };

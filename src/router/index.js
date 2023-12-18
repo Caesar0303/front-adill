@@ -7,6 +7,9 @@ import PostData from "@/components/posts/PostData";
 import ProductList from "@/views/ProductList.vue";
 import ProductCreate from "@/views/ProductCreate.vue";
 import ProductEdit from "@/views/ProductEdit.vue";
+import AdminUserEdit from "@/views/AdminUserEdit.vue";
+import AdminCategories from "@/views/AdminCategories.vue";
+import UserEdit from "@/views/UserEdit.vue";
 import ProductData from "@/components/products/ProductData.vue";
 import ProductShow from "@/views/ProductShow.vue";
 import UserRegister from "@/views/UserRegister.vue";
@@ -16,7 +19,8 @@ import CategoryData from "@/views/CategoryData.vue";
 import UserCategory from "@/views/UserCategory.vue";
 import AdminPage from "@/views/AdminPage.vue";   
 import AdminProduct from "@/views/AdminProduct.vue"; 
-import AdminClient from "@/views/AdminClient.vue"; 
+import AdminClient from "@/views/AdminClient.vue";
+import CategoryCreate from "@/views/CategoryCreate.vue";
 
 const routes = [
     { path: '/', component: HelloWorld, name: 'Home' },
@@ -26,6 +30,11 @@ const routes = [
     { path: '/products', component: ProductList, name: 'ProductList' },
     { path: '/products/my', component: MyProducts, name: 'MyProducts' },
     { path: '/product/create', component: ProductCreate, name: 'ProductCreate' },
+    { path: '/admin/users', component: AdminUserEdit, name: 'AdminUserEdit' },
+    { path: `/admin/categories`, component: AdminCategories, name: 'AdminCategories' },
+    { path: `/category/create`, component: CategoryCreate, name: 'CategoryCreate' },
+    { path: `/user/:id/edit`, component: UserEdit, name: 'UserEdit' },
+    // { path: '/admin/users', component: AdminUserEdit, name: 'AdminUserEdit' },
     { path: '/product/:id/edit', component: ProductEdit, name: 'ProductEdit' },
     { path: '/product/:id/show', component: ProductShow, name: 'ProductShow' },
     { path: '/product/:id', component: ProductData, name: 'ProductData' },
