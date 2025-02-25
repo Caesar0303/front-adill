@@ -26,6 +26,7 @@ export default {
           name: this.name
         });
         console.log(response);
+        window.location.href = '/admin/categories';
         alert('Роль пользователя обновлена');
       } catch (error) {
         console.error('Error updating user role:', error);
